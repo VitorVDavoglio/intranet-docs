@@ -1,42 +1,49 @@
-import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+const docCategories = [
+  {
+    label: 'Tutorial - Basics',
+    path: '/docs/category/tutorial---basics',
+    description: 'Conceitos fundamentais do Docusaurus',
+  },
+  {
+    label: 'Tutorial - Extras',
+    path: '/docs/category/tutorial---extras',
+    description: 'Funcionalidades avançadas',
+  },
+  {
+    label: 'C6 Bank',
+    path: '/docs/category/c6-bank',
+    description: 'Documentação do ecossistema C6 Bank na IB2B',
+  },
+];
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
+    <Layout title={siteConfig.title} description="Portal de documentação IB2B">
+      <div className={styles.heroSection}>
+        <Heading as="h1" className={styles.heroTitle}>
+          Documentação IB2B
+        </Heading>
+        <Link className={styles.primaryButton} to="/docs/intro">
+          Primeiros passos
+        </Link>
+      </div>
+
+      <main className={styles.categoriesSection}>
+        <div className={styles.categoriesGrid}>
+          {docCategories.map((cat) => (
+            <Link key={cat.path} to={cat.path} className={styles.categoryCard}>
+              <span className={styles.categoryLabel}>{cat.label}</span>
+              <span className={styles.categoryDesc}>{cat.description}</span>
+            </Link>
+          ))}
+        </div>
       </main>
     </Layout>
   );
